@@ -1,0 +1,71 @@
+﻿<Window x:Class="AsyncCommandTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Converters="clr-namespace:AsyncCommandTest.Converters"
+        Title="MainWindow" Height="450" Width="525">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <Converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+    </Window.Resources>
+    
+    <StackPanel>
+        <Label Content="Enter a number:"/>
+        <TextBox Text="{Binding Number}"/>
+        <Button Content="Multiply by 2" Command="{Binding MultiplyAsyncCommand}"/>
+
+        <StackPanel Visibility="{Binding MultiplyAsyncCommand.Execution,
+                    Converter={StaticResource NullToVisibilityConverter}}">
+            <TextBlock Visibility="{Binding Path=MultiplyAsyncCommand.Execution.IsNotComplete,
+                        Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Text="Please wait..." Margin="0,10,0,0"/>
+           
+            <Label Visibility="{Binding MultiplyAsyncCommand.Execution.IsSuccessfullyCompleted,
+                   Converter={StaticResource BooleanToVisibilityConverter}}"
+                   Content="{Binding MultiplyResult, TargetNullValue=[Calulating...]}"
+                   ContentStringFormat="The result is: {0}" Margin="0,10,0,0"/>
+
+            <Border Margin="0,10,0,0" BorderBrush="Black" BorderThickness="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Execution Details" Grid.Row="0" Grid.ColumnSpan="2"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Status:" />
+                    <Label Grid.Row="1" Grid.Column="1"
+                       Content="{Binding MultiplyAsyncCommand.Execution.Status}"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="IsCompleted:" />
+                    <Label Grid.Row="2" Grid.Column="1"
+                       Content="{Binding MultiplyAsyncCommand.Execution.IsCompleted}"/>
+                    <Label Grid.Row="3" Grid.Column="0" Content="IsNotCompleted:" />
+                    <Label Grid.Row="3" Grid.Column="1"
+                       Content="{Binding MultiplyAsyncCommand.Execution.IsNotCompleted}"/>
+                    <Label Grid.Row="4" Grid.Column="0" Content="IsSuccessfullyCompleted:" />
+                    <Label Grid.Row="4" Grid.Column="1"
+                       Content="{Binding MultiplyAsyncCommand.Execution.IsSuccessfullyCompleted}"/>
+                    <Label Grid.Row="5" Grid.Column="0" Content="IsCanceled:" />
+                    <Label Grid.Row="5" Grid.Column="1"
+                       Content="{Binding MultiplyAsyncCommand.Execution.IsCanceled}"/>
+                    <Label Grid.Row="6" Grid.Column="0" Content="IsFaulted:" />
+                    <Label Grid.Row="6" Grid.Column="1"
+                       Content="{Binding MultiplyAsyncCommand.Execution.IsFaulted}"/>
+                    <Label Grid.Row="7" Grid.Column="0" Content="ErrorMessage:" />
+                    <Label Grid.Row="7" Grid.Column="1"
+                       Content="{Binding MultiplyAsyncCommand.Execution.ErrorMessage}"/>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </StackPanel>
+    
+
+</Window>
