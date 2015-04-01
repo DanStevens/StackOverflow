@@ -7,6 +7,6 @@
         d:DataContext="{d:DesignInstance d:Type=MainViewModel, IsDesignTimeCreatable=True}"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <TextBlock Text="{Binding Greet}
+        <TextBlock Text="{Binding Greet}"/>
     </Grid>
 </Window>
