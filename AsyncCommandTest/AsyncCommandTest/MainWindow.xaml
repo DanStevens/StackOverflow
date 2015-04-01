@@ -15,7 +15,7 @@
 
         <StackPanel Visibility="{Binding MultiplyAsyncCommand.Execution,
                     Converter={StaticResource NullToVisibilityConverter}}">
-            <TextBlock Visibility="{Binding Path=MultiplyAsyncCommand.Execution.IsNotComplete,
+            <TextBlock Visibility="{Binding Path=MultiplyAsyncCommand.Execution.IsNotCompleted,
                         Converter={StaticResource BooleanToVisibilityConverter}}"
                         Text="Please wait..." Margin="0,10,0,0"/>
            
